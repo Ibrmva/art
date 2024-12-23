@@ -1,11 +1,14 @@
 "use server";
 
+
 import { redirect } from 'next/navigation'
 import Stripe from "stripe";
-import { handleError } from '../utils';
-import { connectToDatabase } from '../database/mongoose';
-import Transaction from '../database/models/transaction.model';
+
+import { connectToDatabase } from '../mongoose';
+
 import { updateCredits } from './user.actions';
+import Transaction from '../models/transaction.model';
+import { handleError } from '@/lib/utils';
 
 export async function checkoutCredits(transaction: CheckoutTransactionParams) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
